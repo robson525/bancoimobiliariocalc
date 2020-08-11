@@ -5,22 +5,22 @@ import config from '../../config';
 
 const Stack = createStackNavigator();
 
-function SettingsScreen() {
+function GameScreen() {
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
       <Text>
-        SettingsScreen
+        Game
       </Text>
     </View>
   );
 }
 
-function SettingsTabStack() {
+function GameTabStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={config.Screen.Settings.name} component={SettingsScreen} options={{ title: `${config.Screen.Settings.title}` }} />
+      <Stack.Screen name={config.Screen.Game.name} component={GameScreen} options={{ title: `${config.Screen.Game.title}` }} />
     </Stack.Navigator>
   );
 }
 
-export default SettingsTabStack;
+export default GameTabStack;

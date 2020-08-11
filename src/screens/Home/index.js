@@ -1,5 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import config from '../../config';
+
+const Stack = createStackNavigator();
 
 // eslint-disable-next-line react/prop-types
 function HomeScreen({ navigation: { navigate } }) {
@@ -27,4 +31,12 @@ function HomeScreen({ navigation: { navigate } }) {
   );
 }
 
-export default HomeScreen;
+function HomeTabStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name={config.Screen.Home.name} component={HomeScreen} options={{ title: `${config.Screen.Home.title}` }} />
+    </Stack.Navigator>
+  );
+}
+
+export default HomeTabStack;

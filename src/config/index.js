@@ -4,9 +4,9 @@ const Screen = {
   Settings: { name: 'SettingsScreen', title: 'Configuração' },
 };
 const Tab = {
-  Home: { name: 'HomeTab', title: 'Inicio' },
-  Game: { name: 'GameTab', title: 'Jogo' },
-  Settings: { name: 'SettingsTab', title: 'Configuração' },
+  Home: { name: 'HomeTab', icon: 'home', title: 'Inicio' },
+  Game: { name: 'GameTab', icon: 'television-play', title: 'Jogo' },
+  Settings: { name: 'SettingsTab', icon: 'account', title: 'Configuração' },
 };
 
 export default {

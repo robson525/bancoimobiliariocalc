@@ -15,7 +15,8 @@ function GameScreen() {
   );
 }
 
-function GameTabStack() {
+function GameTabStack({ navigation, route }) {
+  console.log('params', route);
   return (
     <Stack.Navigator>
       <Stack.Screen name={config.Screen.Game.name} component={GameScreen} options={{ title: `${config.Screen.Game.title}` }} />

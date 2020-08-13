@@ -1,8 +1,10 @@
-class Game {
+export class Game {
   constructor() {
     this.id = '';
-    this.created = new Date().getDate();
-    this.updated = new Date().getDate();
+    this.created = new Date().toString();
+    this.updated = new Date().toString();
     this.players = [];
   }
 }
+
+export default new Game();

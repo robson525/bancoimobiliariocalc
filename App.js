@@ -52,7 +52,6 @@ function MyTabs() {
 
 async function getGames() {
   const aux = await AsyncStorage.getAllKeys();
-  console.log('AllKeys', aux);
 }
 
 export default function App() {

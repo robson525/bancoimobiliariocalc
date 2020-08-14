@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components';
 import general from '../../../constants/general';
+import nav from '../../../constants/navigation';
 import { GameContext } from '../../../constants/gameContext';
 import { Player } from '../../../model/player';
 
@@ -37,30 +38,48 @@ Button.Text = styled.Text`
   padding: 10px;
 `;
 
-function CreateNew(name, goBack, { currentGame, setCurrentGame, config }) {
-  if (!name.length) {
+function CreateNew(player, goBack, { currentGame, setCurrentGame }) {
+  if (!player.name.length) {
     Alert.alert('Nome é obrigatório', 'Digite o nome do jogador');
     return;
   }
-  const player = new Player(name, config.initialAmout);
+
   const game = { ...currentGame };
   game.players.push(player);
+
   setCurrentGame(game);
   goBack();
 }
 
-function NewPlayer({ navigation }) {
+function PlayerEdit({ navigation, route }) {
   const { goBack } = navigation;
+  const { params } = route;
   const gameContext = useContext(GameContext);
-  const [name, setName] = useState('');
+  const { currentGame, config } = gameContext;
+
+  let currentPlayer = new Player();
+  if (params.playerId) {
+    currentPlayer = currentGame.players.find((player) => player.id === params.playerId);
+    navigation.setOptions({ title: nav.Screen.PlayerEdit.title2 });
+  } else {
+    currentPlayer.id = currentGame.players.length + 1;
+    currentPlayer.amount = config.initialAmount;
+    navigation.setOptions({ title: nav.Screen.PlayerEdit.title });
+  }
+  const [player, setPlayer] = useState(currentPlayer);
+
+  console.log('PlayerEdit', navigation);
+
   return (
     <>
       <NameContainer>
         <Label>Nome do Jogador:</Label>
         <Name
+          autoFocus
+          value={player.name}
           placeholder="Digite um nome"
           placeholderTextColor={general.Color.placeholder}
-          onChangeText={(value) => setName(value)}
+          onChangeText={(name) => setPlayer({ ...player, name })}
         />
       </NameContainer>
       <ButtonContainer>
@@ -71,7 +90,7 @@ function NewPlayer({ navigation }) {
         </Button>
         <Button
           color={general.Button.invertedBackgroud}
-          onPress={() => CreateNew(name, goBack, gameContext)}
+          onPress={() => CreateNew(player, goBack, gameContext)}
         >
           <Button.Text color={general.Button.invertedColor}>
             Salvar
@@ -82,4 +101,4 @@ function NewPlayer({ navigation }) {
   );
 }
 
-export default NewPlayer;
+export default PlayerEdit;

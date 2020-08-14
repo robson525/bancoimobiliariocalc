@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 
 export class Player {
-  constructor(name, amout) {
+  constructor(id, name, amount) {
+    this.id = id ?? 0;
     this.name = name;
-    this.amout = amout ?? 0;
+    this.amount = amount ?? 0;
   }
 }
 
@@ -11,5 +12,5 @@ export default new Player();
 
 Player.propTypes = {
   name: PropTypes.string,
-  amout: PropTypes.number,
+  amount: PropTypes.number,
 };

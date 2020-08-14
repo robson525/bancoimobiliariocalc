@@ -42,12 +42,12 @@ export const { Consumer } = GameContext;
 
 GameProvider.propTypes = {
   games: PropTypes.arrayOf(Game),
-  currentGame: PropTypes.objectOf(Game),
-  config: PropTypes.objectOf(Config),
+  currentGame: PropTypes.instanceOf(Game),
+  config: PropTypes.instanceOf(Config),
 };
 
 GameProvider.defaultProps = {
   games: [],
-  currentGame: {},
-  config: {},
+  currentGame: new Game(),
+  config: new Config(),
 };

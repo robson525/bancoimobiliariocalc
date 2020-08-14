@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import config from '../../config';
+import nav from '../../constants/navigation';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +18,7 @@ function SettingsScreen() {
 function SettingsTabStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={config.Screen.Settings.name} component={SettingsScreen} options={{ title: `${config.Screen.Settings.title}` }} />
+      <Stack.Screen name={nav.Screen.Settings.name} component={SettingsScreen} options={{ title: `${nav.Screen.Settings.title}` }} />
     </Stack.Navigator>
   );
 }

@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { AsyncStorage } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import config from './src/config';
+import { GameProvider } from './src/constants/gameContext';
+import nav from './src/constants/navigation';
 import HomeTabStack from './src/screens/Home';
 import GameTabStack from './src/screens/Game';
 import SettingsTabStack from './src/screens/Settings';
@@ -15,34 +15,34 @@ function MyTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name={config.Tab.Home.name}
+        name={nav.Tab.Home.name}
         component={HomeTabStack}
         options={{
-          tabBarLabel: `${config.Tab.Home.title}`,
+          tabBarLabel: `${nav.Tab.Home.title}`,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name={config.Tab.Home.icon} color={color} size={size} />
+            <MaterialCommunityIcons name={nav.Tab.Home.icon} color={color} size={size} />
           ),
         }}
       />
 
       <Tab.Screen
-        name={config.Tab.Game.name}
+        name={nav.Tab.Game.name}
         component={GameTabStack}
         options={{
-          tabBarLabel: `${config.Tab.Game.title}`,
+          tabBarLabel: `${nav.Tab.Game.title}`,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name={config.Tab.Game.icon} color={color} size={size} />
+            <MaterialCommunityIcons name={nav.Tab.Game.icon} color={color} size={size} />
           ),
         }}
       />
 
       <Tab.Screen
-        name={config.Tab.Settings.name}
+        name={nav.Tab.Settings.name}
         component={SettingsTabStack}
         options={{
-          title: `${config.Tab.Settings.title}`,
+          title: `${nav.Tab.Settings.title}`,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name={config.Tab.Settings.icon} color={color} size={size} />
+            <MaterialCommunityIcons name={nav.Tab.Settings.icon} color={color} size={size} />
           ),
         }}
       />
@@ -50,15 +50,12 @@ function MyTabs() {
   );
 }
 
-async function getGames() {
-  const aux = await AsyncStorage.getAllKeys();
-}
-
 export default function App() {
-  getGames();
   return (
     <NavigationContainer>
-      <MyTabs />
+      <GameProvider>
+        <MyTabs />
+      </GameProvider>
     </NavigationContainer>
   );
 }

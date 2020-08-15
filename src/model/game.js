@@ -14,5 +14,5 @@ export class Game {
 export default new Game();
 
 Game.propTypes = {
-  players: PropTypes.PropTypes.arrayOf(Player),
+  players: PropTypes.arrayOf(Player),
 };

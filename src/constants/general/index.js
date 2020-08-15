@@ -3,6 +3,7 @@ const Button = {
   backgroud: 'white',
   invertedColor: 'white',
   invertedBackgroud: '#007aff',
+  danger: '#ff0040',
 };
 
 const Color = {

@@ -8,7 +8,6 @@ const Screen = {
 const Tab = {
   Home: { name: 'HomeTab', icon: 'home', title: 'Inicio' },
   Game: { name: 'GameTab', icon: 'television-play', title: 'Jogo' },
-  Settings: { name: 'SettingsTab', icon: 'account', title: 'Configuração' },
 };
 
 export default {

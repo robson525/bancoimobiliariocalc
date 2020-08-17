@@ -35,17 +35,6 @@ function MyTabs() {
           ),
         }}
       />
-
-      <Tab.Screen
-        name={nav.Tab.Settings.name}
-        component={SettingsTabStack}
-        options={{
-          title: `${nav.Tab.Settings.title}`,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name={nav.Tab.Settings.icon} color={color} size={size} />
-          ),
-        }}
-      />
     </Tab.Navigator>
   );
 }

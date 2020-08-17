@@ -97,11 +97,16 @@ function HomeScreen({ navigation }) {
   );
 }
 
+function SettingsScreen() {
+  return (<></>);
+}
+
 function HomeTabStack() {
   return (
 
     <Stack.Navigator>
       <Stack.Screen name={nav.Screen.Home.name} component={HomeScreen} options={{ title: `${nav.Screen.Home.title}` }} />
+      <Stack.Screen name={nav.Screen.Settings.name} component={SettingsScreen} options={{ title: `${nav.Screen.Settings.title}` }} />
     </Stack.Navigator>
   );
 }

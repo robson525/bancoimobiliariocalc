@@ -20,7 +20,7 @@ function RenderPlayerItem(player, navigation) {
         onPress={() => navigation.navigate(nav.Screen.Tranfer.name, { playerId: player.id })}
       >
         <PlayerItem.Image>
-          <MaterialIcons name="person" size={40} color={general.Button.color} />
+          <MaterialCommunityIcons name={player.icon} size={40} color={player.color} />
         </PlayerItem.Image>
         <PlayerItem.Name>
           {player.name}
@@ -32,10 +32,18 @@ function RenderPlayerItem(player, navigation) {
       <PlayerItem.Option
         onPress={() => navigation.navigate(nav.Screen.Edit.name, { playerId: player.id })}
       >
-        <MaterialCommunityIcons name="dots-vertical" size={40} color={general.Button.color} />
+        <MaterialCommunityIcons name="pencil" size={20} color={player.color} />
       </PlayerItem.Option>
     </PlayerItem>
   );
+}
+
+function AddPlayer(currentGame, navigation) {
+  if (currentGame.players.length >= 6) {
+    Alert.alert('Máximo de jogadores', 'O numero máxio de jogadores é 6');
+  } else {
+    navigation.navigate(nav.Screen.Edit.name, { playerId: 0 });
+  }
 }
 
 function Players({ navigation }) {
@@ -45,7 +53,7 @@ function Players({ navigation }) {
     <>
       <TopView>
         <TopView.Button
-          onPress={() => navigation.navigate(nav.Screen.Edit.name, { playerId: 0 })}
+          onPress={() => AddPlayer(currentGame, navigation)}
           onLongPress={() => Alert.alert(alert.Game.AddLong.title, alert.Game.AddLong.msg)}
         >
           <MaterialIcons name="person-add" size={30} color={general.Button.color} />

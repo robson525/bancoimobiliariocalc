@@ -8,28 +8,19 @@ export const GameContext = createContext({});
 export const GameProvider = (props) => {
   // Initial values are obtained from the props
   const {
-    games: initialGames,
     currentGame: initialCurrentGames,
     config: initialConfig,
     children,
   } = props;
 
   // Use State to keep the values
-  const [games, setGames] = useState(initialGames);
   const [currentGame, setCurrentGame] = useState(initialCurrentGames);
   const [config, setConfig] = useState(initialConfig);
 
-  const addGame = (game) => {
-    setGames(games.concat([game]));
-  };
-
   // Make the context object:
   const gameContext = {
-    games,
-    setGames,
     currentGame,
     setCurrentGame,
-    addGame,
     config,
     setConfig,
   };
@@ -41,13 +32,11 @@ export const GameProvider = (props) => {
 export const { Consumer } = GameContext;
 
 GameProvider.propTypes = {
-  games: PropTypes.arrayOf(Game),
   currentGame: PropTypes.instanceOf(Game),
   config: PropTypes.instanceOf(Config),
 };
 
 GameProvider.defaultProps = {
-  games: [],
   currentGame: new Game(),
   config: new Config(),
 };

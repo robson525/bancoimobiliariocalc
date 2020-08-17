@@ -7,7 +7,6 @@ import { GameProvider } from './src/constants/gameContext';
 import nav from './src/constants/navigation';
 import HomeTabStack from './src/screens/Home';
 import GameTabStack from './src/screens/Game';
-import SettingsTabStack from './src/screens/Settings';
 
 const Tab = createBottomTabNavigator();
 

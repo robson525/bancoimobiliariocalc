@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Button } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components';
@@ -49,18 +49,21 @@ function AddPlayer(currentGame, navigation) {
 function Players({ navigation }) {
   const { currentGame } = useContext(GameContext);
 
-  return (
-    <>
-      <TopView>
-        <TopView.Button
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <AddButton
           onPress={() => AddPlayer(currentGame, navigation)}
           onLongPress={() => Alert.alert(alert.Game.AddLong.title, alert.Game.AddLong.msg)}
         >
           <MaterialIcons name="person-add" size={30} color={general.Button.color} />
-          <TopView.Button.Text>Add</TopView.Button.Text>
-        </TopView.Button>
-      </TopView>
+        </AddButton>
+      ),
+    });
+  }, [navigation, Alert]);
 
+  return (
+    <>
       <MiddleView>
         <List
           data={currentGame.players}
@@ -76,23 +79,12 @@ function Players({ navigation }) {
 
 export default Players;
 
-const TopView = styled.View`
-  flex: 1;    
+const AddButton = styled.TouchableOpacity`
   flex-direction: row;
-  border-bottom-width: 1px;
-  border-bottom-color: #f2f2f2;
-  elevation: 1;
-`;
-TopView.Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  flex-basis: 20%;
-  margin-top: 10px;
-`;
-
-TopView.Button.Text = styled.Text`
-  text-align: center;
-  color: ${general.Button.color};
+  padding-top: 15px;
+  padding-right: 20px;
 `;
 
 const MiddleView = styled.View`

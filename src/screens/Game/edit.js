@@ -167,11 +167,6 @@ OptionsContainer.Color = styled.View`
   flex: 1;
 `;
 
-const PickerOption = styled.View`
-  flex-direction: row;
-  justify-content: center;
-`;
-
 const ButtonContainer = styled.View`    
     flex-direction: row;
     justify-content: center;

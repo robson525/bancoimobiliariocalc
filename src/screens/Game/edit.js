@@ -31,11 +31,11 @@ function Save(player, goBack, { currentGame, setCurrentGame }) {
   goBack();
 }
 
-function Delete(player, goBack, { currentGame, setCurrentGame, config }) {
+function Delete(player, { setParams, goBack }, { currentGame, setCurrentGame, config }) {
   const remove = () => {
     const game = { ...currentGame };
-    game.players.pop(player);
-
+    game.players.splice(currentGame.players.findIndex((p) => p.id === player.id), 1);
+    setParams({ playerId: 0 });
     setCurrentGame(game);
     goBack();
   };
@@ -130,7 +130,7 @@ function Edit({ navigation, route }) {
         <Button
           hide={!editPlayer}
           color={general.Button.danger}
-          onPress={() => Delete(currentPlayer, goBack, gameContext)}
+          onPress={() => Delete(currentPlayer, navigation, gameContext)}
         >
           <Button.Text color={general.Button.invertedColor}>
             Excluir

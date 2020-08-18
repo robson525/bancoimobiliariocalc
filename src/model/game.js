@@ -1,18 +1,10 @@
-import PropTypes from 'prop-types';
-import { Player } from './player';
-
 export class Game {
-  constructor(players) {
-    this.id = new Date().getTime();
-    this.created = new Date().toString();
-    this.updated = new Date().toString();
-    this.players = players ?? [];
-    this.finished = false;
+  constructor(game) {
+    this.id = game ? game.id : new Date().getTime();
+    this.created = game ? game.created : new Date().toString();
+    this.updated = game ? game.updated : new Date().toString();
+    this.players = game ? game.players : [];
   }
 }
 
 export default new Game();
-
-Game.propTypes = {
-  players: PropTypes.arrayOf(Player),
-};

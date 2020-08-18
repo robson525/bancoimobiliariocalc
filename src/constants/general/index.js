@@ -1,3 +1,8 @@
+const Storage = {
+  Game: '@BIC_CurrentGameId',
+  Config: '@BIC_ConfigId',
+};
+
 const Button = {
   color: '#007aff',
   backgroud: 'white',
@@ -19,6 +24,7 @@ const Icons = {
 };
 
 export default {
+  Storage,
   Button,
   Color,
   Icons,

@@ -1,27 +1,35 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
-import { Alert, Picker } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components';
 import general from '../../constants/general';
-import nav from '../../constants/navigation';
-import alert from '../../constants/alerts';
 import { GameContext } from '../../constants/gameContext';
+import PlayerSelection from '../../components/PlayerSelection';
+import { Player } from '../../model/player';
 
-const optionsDefault = [{ label: 'Banco', value: -1 }, { label: 'Todos', value: 0 }];
+const optionsDefault = [
+  new Player({
+    id: -1, name: 'Banco', color: 'black', icon: 'bank',
+  }),
+  new Player({
+    id: 0, name: 'Todos', color: 'black', icon: 'account-multiple',
+  }),
+];
 
 function Transfer({ navigation, route }) {
   const { params } = route;
   const { currentGame } = useContext(GameContext);
 
-  const resultDefault = { from: params.playerId, to: -1, amount: 0 };
+  const resultDefault = {
+    from: currentGame.players.find((player) => player.id === params.playerId),
+    to: optionsDefault[0],
+    amount: 0,
+  };
   const [result, setResult] = useState(resultDefault);
 
   const options = optionsDefault.concat(
     currentGame.players
-      .sort((player) => (player.name))
-      .map((player) => ({ label: player.name, value: player.id })),
+      .sort((player) => (player.name)),
   );
 
   const change = () => {
@@ -35,27 +43,19 @@ function Transfer({ navigation, route }) {
         <Container.DropDown>
           <Dropdow>
             <Dropdow.Label>De:</Dropdow.Label>
-            <Dropdow.Picker
-              mode="dropdown"
-              selectedValue={result.from}
+            <Dropdow.Selection
+              selected={result.from}
+              options={options}
               onValueChange={(value) => setResult({ ...result, from: value })}
-            >
-              { options.map((option) => (
-                <Picker.Item label={option.label} value={option.value} key={option.value} />
-              ))}
-            </Dropdow.Picker>
+            />
           </Dropdow>
           <Dropdow>
             <Dropdow.Label>Para:</Dropdow.Label>
-            <Dropdow.Picker
-              mode="dropdown"
-              selectedValue={result.to}
+            <Dropdow.Selection
+              selected={result.to}
+              options={options}
               onValueChange={(value) => setResult({ ...result, to: value })}
-            >
-              { options.map((option) => (
-                <Picker.Item label={option.label} value={option.value} key={option.value} />
-              ))}
-            </Dropdow.Picker>
+            />
           </Dropdow>
         </Container.DropDown>
         <Container.Invert
@@ -74,7 +74,7 @@ const Container = styled.View`
   flex-direction: row;
 `;
 Container.DropDown = styled.View`
-  flex: 9;
+  flex: 8;
 `;
 Container.Invert = styled.TouchableOpacity`
   flex: 1;
@@ -90,8 +90,8 @@ const Dropdow = styled.View`
 Dropdow.Label = styled.Text`
   flex: 1;
   text-align: right;
+  font-size: 16px;
 `;
-Dropdow.Picker = styled.Picker`
-  flex: 5;
-  color: ${general.Color.default};
+Dropdow.Selection = styled(PlayerSelection)`
+  flex: 8;
 `;

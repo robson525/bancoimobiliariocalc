@@ -1,7 +1,7 @@
 export class Config {
-  constructor() {
-    this.confirmActions = true;
-    this.initialAmount = 2500;
+  constructor(config) {
+    this.confirmActions = config ? config.confirmActions : true;
+    this.initialAmount = config ? config.initialAmount : 2500;
   }
 }
 

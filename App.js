@@ -11,6 +11,7 @@ import HomeTabStack from './src/screens/Home';
 import GameTabStack from './src/screens/Game';
 import { Game } from './src/model/game';
 import { Config } from './src/model/config';
+import { Player } from './src/model/player';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,33 +50,55 @@ function Loading() {
   );
 }
 
-export default function App() {
-  const [game, setGame] = useState({
-    game: new Game(),
-    config: new Config(),
-    started: false,
-  });
+function Content() {
+  const [started, setStarted] = useState(false);
+  const { setStartState } = useContext(GameContext);
 
   const loadGameAndConfig = async () => {
-    const sGame = await AsyncStorage.getItem(general.Storage.Game);
+    let sGame = await AsyncStorage.getItem(general.Storage.Game);
     const sConfig = await AsyncStorage.getItem(general.Storage.Config);
+    if (__DEV__) {
+      if (sGame === null) {
+        const g = new Game();
+        g.players = [
+          new Player({
+            id: 0, name: 'Robson', amount: 2500, color: general.Color.options[0], icon: general.Icons.options[0],
+          }),
+          new Player({
+            id: 1, name: 'Cibele', amount: 2500, color: general.Color.options[1], icon: general.Icons.options[0],
+          }),
+          new Player({
+            id: 2, name: 'Maria', amount: 2500, color: general.Color.options[2], icon: general.Icons.options[0],
+          }),
+        ];
+        sGame = JSON.stringify(g);
+      }
+    }
 
-    setGame({
-      game: new Game(sGame),
-      config: new Config(sConfig),
-      started: true,
-    });
+    setStarted(true);
+    setStartState(
+      new Game(JSON.parse(sGame)),
+      new Config(JSON.parse(sConfig)),
+    );
   };
 
   useEffect(() => {
     loadGameAndConfig();
-  }, [game.started]);
+  }, [started]);
 
   return (
+    <>
+      {!started && <Loading />}
+      {started && <MyTabs />}
+    </>
+  );
+}
+
+export default function App() {
+  return (
     <NavigationContainer>
-      <GameProvider currentGame={game.game} config={game.config}>
-        {!game.started && <Loading />}
-        {game.started && <MyTabs />}
+      <GameProvider>
+        <Content />
       </GameProvider>
     </NavigationContainer>
   );

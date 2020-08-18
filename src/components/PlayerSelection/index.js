@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Player } from '../../model/player';
+import general from '../../constants/general';
 
 function PlayerSelection({
   selected, options, onValueChange,
@@ -16,7 +17,7 @@ function PlayerSelection({
     <Container>
       <Field onPress={() => setVisible(!visible)}>
         <Field.Icon name={selected.icon} size={40} color={selected.color} />
-        <Field.Name>{selected.name}</Field.Name>
+        <Field.Name color={selected.color}>{selected.name}</Field.Name>
       </Field>
       <Modal
         animationType="slide"
@@ -69,12 +70,22 @@ const Container = styled.View`
 
 const Field = styled.TouchableOpacity`
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 Field.Icon = styled(MaterialCommunityIcons)`
   flex: 1;
+  text-align: center;
+  
 `;
 Field.Name = styled.Text`
   flex: 3;
+  font-size: 20px;
+  color: ${(props) => props.color};
+  font-weight: bold;
+  
+  border-bottom-width: 1px;
+  border-bottom-color: ${general.Color.default};
 `;
 
 const ModalContent = styled.View`

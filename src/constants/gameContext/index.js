@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import general from '../general';
 import { Game } from '../../model/game';
 import { Config } from '../../model/config';
-import { set } from 'react-native-reanimated';
 
 export const GameContext = createContext({});
 
@@ -20,7 +19,6 @@ export const GameProvider = (props) => {
   const [config, setConfigState] = useState(initialConfig);
 
   const setCurrentGameStore = async (nGame) => {
-    console.log('setCurrentGameStore', nGame);
     await AsyncStorage.setItem(general.Storage.Game, JSON.stringify(nGame));
   };
   const setConfigStore = async (nConfig) => {
@@ -36,12 +34,18 @@ export const GameProvider = (props) => {
     setConfigStore(nConfig);
   };
 
+  const setStartState = (nGame, nConfig) => {
+    setCurrentGameState(nGame);
+    setConfigState(nConfig);
+  };
+
   // Make the context object:
   const gameContext = {
     currentGame,
     setCurrentGame,
     config,
     setConfig,
+    setStartState,
   };
 
   // pass the value in provider and return

@@ -8,14 +8,14 @@ const Button = {
   backgroud: 'white',
   invertedColor: 'white',
   invertedBackgroud: '#007aff',
-  danger: '#ff0000',
+  danger: 'red',
 };
 
 const Color = {
   default: '#007aff',
   placeholder: '#b3d7ff',
   text: '#111111',
-  options: ['#007aff', '#24ca17', '#ffbf00', '#9b2ed1', '#e3541c', '#808080'],
+  options: ['#204ac8', '#84cc4b', '#e8a300', '#bf1eca', '#e84800', '#747474'],
 };
 
 const Icons = {

@@ -12,6 +12,10 @@ export class Game {
       });
     }
   }
+
+  static Copy(game) {
+    return new Game(JSON.parse(JSON.stringify(game)));
+  }
 }
 
 export default new Game();

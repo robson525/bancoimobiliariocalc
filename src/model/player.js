@@ -9,6 +9,10 @@ export class Player {
     this.color = player ? player.color : general.Color.default;
     this.icon = player ? player.icon : general.Icons.default;
   }
+
+  static Copy(player) {
+    return new Player(JSON.parse(JSON.stringify(player)));
+  }
 }
 
 export default new Player();

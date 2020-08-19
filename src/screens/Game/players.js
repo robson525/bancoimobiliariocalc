@@ -44,7 +44,7 @@ function RenderPlayerItem(player, navigation) {
 
 function AddPlayer(currentGame, navigation) {
   if (currentGame.players.length >= 6) {
-    Alert.alert('Máximo de jogadores', 'O numero máxio de jogadores é 6');
+    Alert.alert('Máximo de jogadores', 'O número máximo de jogadores é 6');
   } else {
     navigation.navigate(nav.Screen.Edit.name, { playerId: 0 });
   }
@@ -99,8 +99,12 @@ const MiddleView = styled.View`
 const List = styled.FlatList``;
 const PlayerItem = styled.View`
   flex-direction: row;  
-  border-bottom-width: 1px;
-  border-bottom-color: #d9d9d9;
+  border-width: 1px;
+  border-color: #d9d9d9;  
+  margin: 2px 5px;
+  border-radius: 5px;
+  background-color: white;
+  elevation: 1;
 `;
 PlayerItem.Info = styled.TouchableOpacity`
   flex-direction: row;

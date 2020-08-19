@@ -5,17 +5,20 @@ import Modal from 'react-native-modal';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import general from '../../constants/general';
 import { Player } from '../../model/player';
 
 function PlayerIconColor({
   type, player, options, onValueChange,
 }) {
   const [visible, setVisible] = useState(false);
+  const icon = type === 'color'? 'palette' : player.icon;
+  const color = type === 'color'? 'black' : player.color;
 
   return (
     <>
       <Field onPress={() => setVisible(!visible)}>
-        <MaterialCommunityIcons name={player.icon} size={40} color={player.color} />
+        <MaterialCommunityIcons name={icon} size={40} color={color} />
       </Field>
       <Modal
         isVisible={visible}
@@ -36,9 +39,9 @@ function PlayerIconColor({
                 }}
               >
                 <MaterialCommunityIcons
-                  name={type === 'icon' ? option : player.icon}
+                  name={type === 'icon' ? option : icon}
                   size={40}
-                  color={type === 'color' ? option : player.color}
+                  color={type === 'color' ? option : color}
                 />
               </Option>
             ))}

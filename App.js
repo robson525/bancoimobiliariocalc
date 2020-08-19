@@ -57,18 +57,18 @@ function Content() {
   const loadGameAndConfig = async () => {
     let sGame = await AsyncStorage.getItem(general.Storage.Game);
     const sConfig = await AsyncStorage.getItem(general.Storage.Config);
-    if (__DEV__) {
-      if (sGame === null) {
+    if (true || __DEV__) {
+      if (true || sGame === null) {
         const g = new Game();
         g.players = [
           new Player({
-            id: 0, name: 'Robson', amount: 2500, color: general.Color.options[0], icon: general.Icons.options[0],
+            id: 1, name: 'Robson', amount: 2500, color: general.Color.options[0], icon: general.Icons.options[0],
           }),
           new Player({
-            id: 1, name: 'Cibele', amount: 2500, color: general.Color.options[1], icon: general.Icons.options[0],
+            id: 2, name: 'Cibele', amount: 2500, color: general.Color.options[1], icon: general.Icons.options[0],
           }),
           new Player({
-            id: 2, name: 'Maria', amount: 2500, color: general.Color.options[2], icon: general.Icons.options[0],
+            id: 3, name: 'Maria', amount: 2500, color: general.Color.options[2], icon: general.Icons.options[0],
           }),
         ];
         sGame = JSON.stringify(g);

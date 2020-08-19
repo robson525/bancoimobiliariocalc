@@ -13,6 +13,10 @@ function FormatAmount(amount) {
   return `$ ${amount.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
 }
 
+function SortPlayers(player1, player2) {
+  return player1.name.toUpperCase() > player2.name.toUpperCase();
+}
+
 function RenderPlayerItem(player, navigation) {
   return (
     <PlayerItem>
@@ -60,13 +64,13 @@ function Players({ navigation }) {
         </AddButton>
       ),
     });
-  }, [navigation, Alert]);
+  }, [navigation, currentGame, Alert]);
 
   return (
     <>
       <MiddleView>
         <List
-          data={currentGame.players}
+          data={currentGame.players.sort(SortPlayers)}
           renderItem={({ item }) => RenderPlayerItem(item, navigation)}
           keyExtractor={(item) => `${item.id}`}
         />

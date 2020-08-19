@@ -18,8 +18,6 @@ function PlayerIconColor({
         <MaterialCommunityIcons name={player.icon} size={40} color={player.color} />
       </Field>
       <Modal
-        animationType="slide"
-        transparent
         isVisible={visible}
         onBackButtonPress={() => setVisible(false)}
         onBackdropPress={() => setVisible(false)}

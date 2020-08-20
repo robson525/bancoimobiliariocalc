@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bancoimobiliariocalc",
+    "name": "Banco Imobiliário Calc",
     "slug": "bancoimobiliariocalc",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,14 +17,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
+      }
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
     "android": {
-      "package": "com.rcvs.bancoimobiliariocalc"
+      "package": "com.rcvs.bancoimobiliariocalc",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-4718342817497822~2400312415"
+      }
     },
-    "description": ""
+    "description": "Calculadora para jogar Banco Imobiliário",
+    "githubUrl" : "https://github.com/robson525/bancoimobiliariocalc"
   }
 }

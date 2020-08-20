@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components';
+import { AdMobBanner } from 'expo-ads-admob';
 import general from '../../constants/general';
 import nav from '../../constants/navigation';
 import alert from '../../constants/alerts';
@@ -76,7 +77,14 @@ function Players({ navigation }) {
         />
       </MiddleView>
 
-      <BottonView />
+      <BottonView>
+        <AdMobBanner
+          bannerSize="smartBannerPortrait"
+          adUnitID={__DEV__ ? general.Admob.TestBannerId : general.Admob.BannerId}
+          setTestDeviceIDAsync
+          onDidFailToReceiveAdWithError={(error) => console.log(error)}
+        />
+      </BottonView>
     </>
   );
 }

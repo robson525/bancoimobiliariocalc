@@ -1,3 +1,10 @@
+const Admob = {
+  TestBannerId: 'ca-app-pub-3940256099942544/6300978111',
+  TestNewGameId: 'ca-app-pub-3940256099942544/1033173712',
+  BannerId: 'ca-app-pub-4718342817497822/6733668469',
+  NewGameId: 'ca-app-pub-4718342817497822/9144850011',
+};
+
 const Storage = {
   Game: '@BIC_CurrentGameId',
   Config: '@BIC_ConfigId',
@@ -25,6 +32,7 @@ const Icons = {
 };
 
 export default {
+  Admob,
   Storage,
   Button,
   Color,

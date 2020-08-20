@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Text, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components';
+import { AdMobBanner, AdMobInterstitial, setTestDeviceIDAsync } from 'expo-ads-admob';
 import nav from '../../constants/navigation';
 import general from '../../constants/general';
 import { GameContext } from '../../constants/gameContext';
@@ -13,6 +14,15 @@ import { Game } from '../../model/game';
 import SettingsScreen from './settings';
 
 const Stack = createStackNavigator();
+
+async function setTestAd() {
+  await setTestDeviceIDAsync('EMULATOR');
+}
+
+async function ShowAdInterstitial() {
+  await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
+  await AdMobInterstitial.showAdAsync();
+}
 
 function ReplaceCurrentGame(createGame) {
   Alert.alert(
@@ -34,6 +44,7 @@ function NewGame(gameContext, { navigate }) {
   const { currentGame, setCurrentGame } = gameContext;
 
   const createGame = () => {
+    ShowAdInterstitial();
     setCurrentGame(new Game());
     navigate(nav.Tab.Game.name);
   };
@@ -47,6 +58,13 @@ function NewGame(gameContext, { navigate }) {
 
 function HomeScreen({ navigation }) {
   const gameContext = useContext(GameContext);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    if (__DEV__) setTestAd();
+    // eslint-disable-next-line no-undef
+    AdMobInterstitial.setAdUnitID(__DEV__ ? general.Admob.TestNewGameId : general.Admob.NewGameId);
+  }, []);
 
   return (
     <>
@@ -67,7 +85,15 @@ function HomeScreen({ navigation }) {
           </MiddleView.Button>
         </MiddleView.Container>
       </MiddleView>
-      <BottonView />
+      <BottonView>
+        <AdMobBanner
+          bannerSize="smartBannerPortrait"
+          // eslint-disable-next-line no-undef
+          adUnitID={__DEV__ ? general.Admob.TestBannerId : general.Admob.BannerId}
+          setTestDeviceIDAsync
+          onDidFailToReceiveAdWithError={(error) => console.log(error)}
+        />
+      </BottonView>
     </>
   );
 }
@@ -83,7 +109,9 @@ function HomeTabStack() {
 
 export default HomeTabStack;
 
-const TopView = styled.View``;
+const TopView = styled.View`
+  flex: 1;
+`;
 TopView.Logo = styled.Text`
   font-family: 'PeaceSans';
   text-align: center;
@@ -94,7 +122,7 @@ TopView.Logo = styled.Text`
 `;
 
 const MiddleView = styled.View`
-  flex: 8;    
+  flex: 6;    
   flex-direction: row;
   flex-wrap: wrap;
 `;
@@ -116,5 +144,4 @@ MiddleView.Button = styled.TouchableOpacity`
 `;
 const BottonView = styled.View`
   flex: 1;
-  background-color: blue;
 `;

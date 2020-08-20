@@ -1,9 +1,11 @@
+/* eslint-disable global-require */
 /* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from 'react';
 import { AsyncStorage } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as Font from 'expo-font';
 import { GameProvider, GameContext } from './src/constants/gameContext';
 import general from './src/constants/general';
 import nav from './src/constants/navigation';
@@ -44,15 +46,18 @@ function MyTabs() {
 }
 
 function Loading() {
-  return (
-    <>
-    </>
-  );
+  return (<></>);
 }
 
 function Content() {
   const [started, setStarted] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState(false);
   const { setStartState } = useContext(GameContext);
+
+  const loadFonts = () => Font.loadAsync({
+    Cityvetica: require('./src/assets/fonts/Cityvetica.ttf'),
+    Games: require('./src/assets/fonts/Games.ttf'),
+  }).then(() => setFontLoaded(true));
 
   const loadGameAndConfig = async () => {
     let sGame = await AsyncStorage.getItem(general.Storage.Game);
@@ -95,10 +100,14 @@ function Content() {
     loadGameAndConfig();
   }, [started]);
 
+  useEffect(() => {
+    loadFonts();
+  }, [fontLoaded]);
+
   return (
     <>
-      {!started && <Loading />}
-      {started && <MyTabs />}
+      {(!started || !fontLoaded) && <Loading />}
+      {started && fontLoaded && <MyTabs />}
     </>
   );
 }

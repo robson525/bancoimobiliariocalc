@@ -76,7 +76,7 @@ function Edit({ navigation, route }) {
 
     currentPlayer.amount = config.initialAmount;
     currentPlayer.color = optionsColors.length ? optionsColors[0] : general.Color.default;
-    navigation.setOptions({ title: nav.Screen.Edit.title });
+    navigation.setOptions({ title: nav.Screen.Edit.title1 });
   }
   const [player, setPlayer] = useState(currentPlayer);
 
@@ -89,7 +89,6 @@ function Edit({ navigation, route }) {
           value={player.name}
           placeholder="Digite um nome"
           maxLength={15}
-          placeholderTextColor={general.Color.placeholder}
           onChangeText={(name) => setPlayer(new Player({ ...player, name }))}
         />
       </NameContainer>
@@ -147,9 +146,11 @@ const NameContainer = styled.View`
     padding: 10px;
 `;
 const Label = styled.Text`
-  color: ${general.Button.color};
+  color: ${general.Color.default};
 `;
-const Name = styled.TextInput`
+const Name = styled.TextInput.attrs({
+  placeholderTextColor: general.Color.placeholder,
+})`
   margin-top: 10px;
   font-size: 20px;
   border-bottom-width: 1px;

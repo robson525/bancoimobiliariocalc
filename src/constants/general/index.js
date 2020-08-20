@@ -9,6 +9,7 @@ const Button = {
   invertedColor: 'white',
   invertedBackgroud: '#007aff',
   danger: 'red',
+  cobalto: '#0047ab',
 };
 
 const Color = {

@@ -1,13 +1,16 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import { Text, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components';
 import nav from '../../constants/navigation';
 import general from '../../constants/general';
 import { GameContext } from '../../constants/gameContext';
 import { Game } from '../../model/game';
+import SettingsScreen from './settings';
 
 const Stack = createStackNavigator();
 
@@ -53,14 +56,14 @@ function HomeScreen({ navigation }) {
       <MiddleView>
         <MiddleView.Container>
           <MiddleView.Button onPress={() => NewGame(gameContext, navigation)}>
-            <MaterialCommunityIcons name="play-circle" size={88} color={general.Button.color} />
-            <Text>Iniciar novo jogo</Text>
+            <MaterialCommunityIcons name="play" size={88} color={general.Button.color} />
+            <Text>Iniciar Novo Jogo</Text>
           </MiddleView.Button>
         </MiddleView.Container>
         <MiddleView.Container>
-          <MiddleView.Button onPress={() => { }}>
-            <MaterialCommunityIcons name="stop-circle" size={88} color={general.Button.color} />
-            <Text>Pausar jogo</Text>
+          <MiddleView.Button onPress={() => navigation.navigate(nav.Screen.Settings.name)}>
+            <Ionicons name="md-settings" size={88} color={general.Button.color} />
+            <Text>Configuração</Text>
           </MiddleView.Button>
         </MiddleView.Container>
       </MiddleView>
@@ -69,16 +72,11 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function SettingsScreen() {
-  return (<></>);
-}
-
 function HomeTabStack() {
   return (
-
     <Stack.Navigator>
-      <Stack.Screen name={nav.Screen.Home.name} component={HomeScreen} options={{ title: `${nav.Screen.Home.title}` }} />
-      <Stack.Screen name={nav.Screen.Settings.name} component={SettingsScreen} options={{ title: `${nav.Screen.Settings.title}` }} />
+      <Stack.Screen name={nav.Screen.Home.name} component={HomeScreen} options={nav.Screen.Home.options} />
+      <Stack.Screen name={nav.Screen.Settings.name} component={SettingsScreen} options={nav.Screen.Settings.options} />
     </Stack.Navigator>
   );
 }
@@ -87,11 +85,12 @@ export default HomeTabStack;
 
 const TopView = styled.View``;
 TopView.Logo = styled.Text`
+  font-family: 'PeaceSans';
   text-align: center;
   font-size: 30px;
-  padding-top: 25px;
+  padding: 25px 0 10px 0;
   text-shadow: 1px 2px 10px;
-  color: ${general.Color.default}
+  color: ${general.Color.default};
 `;
 
 const MiddleView = styled.View`

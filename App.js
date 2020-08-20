@@ -55,8 +55,7 @@ function Content() {
   const { setStartState } = useContext(GameContext);
 
   const loadFonts = () => Font.loadAsync({
-    Cityvetica: require('./src/assets/fonts/Cityvetica.ttf'),
-    Games: require('./src/assets/fonts/Games.ttf'),
+    PeaceSans: require('./src/assets/fonts/PeaceSans.otf'),
   }).then(() => setFontLoaded(true));
 
   const loadGameAndConfig = async () => {

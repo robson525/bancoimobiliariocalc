@@ -202,7 +202,7 @@ function Transfer({ navigation, route }) {
           onChangeText={(value) => setResult({
             ...result,
             // eslint-disable-next-line no-restricted-globals
-            amount: value.length ? (isNaN(parseInt(value, 10)) ? result.amount : parseInt(value, 10)) : '',
+            amount: value.length ? (isNaN(parseInt(value, 10)) ? result.amount : `${parseInt(value, 10)}`) : '',
           })}
         />
       </Amount>

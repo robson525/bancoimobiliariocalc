@@ -80,9 +80,8 @@ function Players({ navigation }) {
       <BottonView>
         <AdMobBanner
           bannerSize="smartBannerPortrait"
-          adUnitID={__DEV__ ? general.Admob.TestBannerId : general.Admob.BannerId}
+          adUnitID={__DEV__ ? general.Admob.TestBannerId : general.Admob.BannerIdGame}
           setTestDeviceIDAsync
-          onDidFailToReceiveAdWithError={(error) => console.log(error)}
         />
       </BottonView>
     </>

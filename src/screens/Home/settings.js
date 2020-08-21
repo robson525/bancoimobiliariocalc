@@ -13,7 +13,17 @@ function SettingsScreen() {
         <Label onPress={() => Alert.alert('Valor Inicial', 'Valor que será aplicado a cada jogador')}>
           <Label.Text>Valor Inicial:</Label.Text>
         </Label>
-        <Input placeholder="Digite o Valor" value={`${config.initialAmount}`} />
+        <Input
+          placeholder="Digite o Valor"
+          maxLength={9}
+          keyboardType="phone-pad"
+          value={`${config.initialAmount}`}
+          onChangeText={(value) => setConfig({
+            ...config,
+            // eslint-disable-next-line no-restricted-globals
+            initialAmount: isNaN(parseInt(value, 10)) ? config.initialAmount : parseInt(value, 10),
+          })}
+        />
       </Container>
       <Container>
         <Label onPress={() => Alert.alert('Confirmação', 'Exibir mensagem de confirmarção ao aplicar mudanças')}>

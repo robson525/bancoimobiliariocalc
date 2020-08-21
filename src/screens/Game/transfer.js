@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
@@ -122,7 +123,7 @@ function Transfer({ navigation, route }) {
   const resultDefault = {
     to: Player.Copy(currentGame.players.find((player) => player.id === params.playerId)),
     from: optionsDefault[0],
-    amount: 0,
+    amount: '',
   };
   const [result, setResult] = useState({ ...resultDefault });
   const [confirmation, showConfirmation] = useState(false);
@@ -194,10 +195,15 @@ function Transfer({ navigation, route }) {
         />
         <Amount.Input
           keyboardType="phone-pad"
-          maxLength={6}
+          maxLength={9}
           placeholder="Valor"
           placeholderTextColor="#93bf85"
-          onChangeText={(value) => setResult({ ...result, amount: value })}
+          value={`${result.amount}`}
+          onChangeText={(value) => setResult({
+            ...result,
+            // eslint-disable-next-line no-restricted-globals
+            amount: value.length ? (isNaN(parseInt(value, 10)) ? result.amount : parseInt(value, 10)) : '',
+          })}
         />
       </Amount>
 

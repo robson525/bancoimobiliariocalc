@@ -89,9 +89,8 @@ function HomeScreen({ navigation }) {
         <AdMobBanner
           bannerSize="smartBannerPortrait"
           // eslint-disable-next-line no-undef
-          adUnitID={__DEV__ ? general.Admob.TestBannerId : general.Admob.BannerId}
+          adUnitID={__DEV__ ? general.Admob.TestBannerId : general.Admob.BannerIdHome}
           setTestDeviceIDAsync
-          onDidFailToReceiveAdWithError={(error) => console.log(error)}
         />
       </BottonView>
     </>
